@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "दिशा — आपकी सहेली",
+  title: "Naari AI — आपकी सहेली",
   description: "सरकारी योजनाओं की जानकारी आपकी भाषा में, आपकी आवाज़ में",
   keywords: "PMMVY, government scheme, women, India, Hindi, voice",
   robots: "noindex, nofollow",

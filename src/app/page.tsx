@@ -18,7 +18,7 @@ function AppContent() {
 
   // Speech hooks for voice synthesis & recognition
   const { speak, stop: stopSpeaking, isSpeaking } = useSpeechSynthesis();
-  const { locale, speechLocale } = useLanguage();
+  const { locale, speechLocale, t } = useLanguage();
   const speakInLanguage = useCallback((text: string) => speak(text, speechLocale), [speak, speechLocale]);
 
   const handleSpeechResult = useCallback((text: string) => {
@@ -46,13 +46,13 @@ function AppContent() {
     }
 
     if (activeTab === 'home') {
-      speakInLanguage('नमस्ते! यह दिशा पोर्टल का मुख्य पृष्ठ है। यहाँ आप बोलकर सरकारी योजनाओं की पात्रता जांच सकती हैं।');
+      speakInLanguage(t('नमस्ते! यह Naari AI पोर्टल का मुख्य पृष्ठ है। यहाँ आप बोलकर सरकारी योजनाओं की पात्रता जांच सकती हैं।'));
     } else if (activeTab === 'schemes') {
-      speakInLanguage('यह योजना निर्देशिका है। यहाँ मातृ वंदना, उज्ज्वला, सुकन्या समृद्धि और अन्य सरकारी योजनाओं की सूची और जरूरी दस्तावेज दिए गए हैं।');
+      speakInLanguage(t('यह योजना निर्देशिका है। यहाँ मातृ वंदना, उज्ज्वला, सुकन्या समृद्धि और अन्य सरकारी योजनाओं की सूची और जरूरी दस्तावेज दिए गए हैं।'));
     } else if (activeTab === 'help') {
-      speakInLanguage('यह सहायता केंद्र है। यहाँ हेल्पलाइन नंबर 181 और 1075, निकटतम सेवा केंद्र, और शिकायत दर्ज करने की सुविधा उपलब्ध है।');
+      speakInLanguage(t('यह सहायता केंद्र है। यहाँ हेल्पलाइन नंबर 181 और 1075, निकटतम सेवा केंद्र, और शिकायत दर्ज करने की सुविधा उपलब्ध है।'));
     } else if (activeTab === 'profile') {
-      speakInLanguage('यह आपकी नागरिक प्रोफाइल है। यहाँ आपके सक्रिय आवेदन, डिजिटल दस्तावेज, और पूर्व बातचीत का विवरण है।');
+      speakInLanguage(t('यह आपकी नागरिक प्रोफाइल है। यहाँ आपके सक्रिय आवेदन, डिजिटल दस्तावेज, और पूर्व बातचीत का विवरण है।'));
     }
   };
 

@@ -23,7 +23,7 @@ export function Sidebar({ activeTab, onTabChange, isListening = false }: Sidebar
 
   return (
     <aside className="app-sidebar">
-      <nav aria-label="मुख्य नेविगेशन" className="sidebar-nav">
+      <nav aria-label={t('मुख्य नेविगेशन')} className="sidebar-nav">
         {items.map(({ id, label, icon: Icon }) => (
           <button key={id} onClick={() => onTabChange(id)} className={`sidebar-link ${activeTab === id ? 'active' : ''}`} aria-current={activeTab === id ? 'page' : undefined}>
             <Icon size={22} strokeWidth={2.2} />
@@ -33,7 +33,7 @@ export function Sidebar({ activeTab, onTabChange, isListening = false }: Sidebar
       </nav>
       <a href="tel:181" className="sidebar-help">
         <span className="sidebar-help-icon"><PhoneCall size={20} /></span>
-        <span><strong>मदद चाहिए?</strong><small>{isListening ? 'आवाज़ सुन रहे हैं' : '181 पर कॉल करें'}</small></span>
+        <span><strong>{t('मदद चाहिए?')}</strong><small>{isListening ? t('आवाज़ सुन रहे हैं') : t('181 पर कॉल करें')}</small></span>
         <span aria-hidden="true">›</span>
       </a>
     </aside>

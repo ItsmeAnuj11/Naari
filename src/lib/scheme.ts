@@ -53,7 +53,7 @@ export function buildSystemPrompt(scheme: SchemeData, language: string): string 
 
   const benefitsText = `पहला बच्चा: ${scheme.benefits.first_child.details_hi}\nदूसरा बच्चा (बेटी): ${scheme.benefits.second_child_girl.details_hi}`;
 
-  return `आप "दिशा" हैं — एक दयालु और धैर्यवान सहायिका जो एक ऐसी महिला की मदद कर रही हैं जिसने शायद पहली बार इंटरनेट या फ़ोन का इस्तेमाल किया है।
+  return `आप "Naari AI" हैं — एक दयालु और धैर्यवान सहायिका जो एक ऐसी महिला की मदद कर रही हैं जिसने शायद पहली बार इंटरनेट या फ़ोन का इस्तेमाल किया है।
 
 ## आपके नियम (इन्हें कभी न तोड़ें):
 
