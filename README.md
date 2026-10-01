@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# दिशा (Disha) — Voice-First Government Scheme Navigator
 
-## Getting Started
+> "She is talking to a kind, patient local helper." — Not a chatbot.
 
-First, run the development server:
+**Disha** is a voice-first AI assistant that helps first-time rural Indian women discover government scheme eligibility, understand required documents, and know where to go — all through natural Hindi conversation.
+
+## 🎯 What It Does
+
+A woman who has never used the internet opens the app, taps one button, speaks in Hindi, and the app:
+
+1. **Asks simple questions** about her situation (one at a time)
+2. **Tells her if she may be eligible** (never guarantees)
+3. **Shows her what documents she needs** (with icons, 3 at a time)
+4. **Tells her where to go** (Anganwadi center, helpline)
+
+Default scheme: **PM Matru Vandana Yojana (PMMVY)** — maternity benefit for pregnant women.
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- npm
+
+### Install and Run
 
 ```bash
+cd app-build
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 on your phone or in a mobile-width browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local`:
 
-## Learn More
+```bash
+cp .env.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Required | Description |
+|----------|----------|-------------|
+| GEMINI_API_KEY | For AI mode | Your Google Gemini API key |
+| DEMO_MODE | No | Set to true for reliable demo without API |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Demo Mode
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Set DEMO_MODE=true in .env.local for reliable demo without API calls.
 
-## Deploy on Vercel
+### Change Scheme
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Edit config/app.json and set the scheme field. Add new scheme files at data/schemes/.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Change Language
+
+Edit config/app.json and set the language field.
+
+## 🏗 Architecture
+
+Browser -> Microphone -> Web Speech API (STT) -> Server API -> Gemini -> Grounded Scheme Data -> Validated Response -> Web Speech API (TTS) -> Audio
+
+### Grounding
+
+All government facts come from data/schemes/pmmvy.json with source URLs and verification dates.
+
+## 🔒 Privacy
+
+- No login or accounts
+- No stored recordings or transcripts
+- No sensitive identity data collection
+- Session-only conversation
+- API keys server-side only
+
+## 🎪 Hackathon Demo
+
+1. Set DEMO_MODE=true
+2. Run npm run dev
+3. Open on phone
+4. Hand the phone to someone
+5. Press Ctrl+Shift+D for debug panel
+
+## 📊 Data Sources
+
+All scheme data verified from official government sources (pmmvy.wcd.gov.in, wcd.nic.in, pib.gov.in, vikaspedia.in).

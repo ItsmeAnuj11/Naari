@@ -111,13 +111,38 @@ export async function POST(request: NextRequest) {
 function handleDemoMode(currentStep: number, userMessage: string) {
   let stepIndex = currentStep;
   
-  // If it's the initial call (step 0 and no user message), return greeting
+  // If it's the initial call (step 0 and no user message), return greeting + first question
   if (stepIndex === 0 && (!userMessage || userMessage === '__init__')) {
-    const step = DEMO_FLOW[0];
+    const greeting = DEMO_FLOW[0];
+    const firstQuestion = DEMO_FLOW[1];
+    // Combine greeting and first question for a natural flow
+    const combinedReply = greeting.assistantResponse + '\n\n' + firstQuestion.assistantResponse;
+    return NextResponse.json({
+      reply: combinedReply,
+      demoStepIndex: 1, // Now at question 1
+      nextStepIndex: 2,
+      showButtons: firstQuestion.showButtons,
+      phase: 'greeting_with_question',
+      isDemo: true,
+    });
+  }
+
+  // For auto-chain messages, directly return the step at the given index
+  if (userMessage === '__auto__') {
+    if (stepIndex < 0 || stepIndex >= DEMO_FLOW.length) {
+      return NextResponse.json({
+        reply: DEMO_FLOW[DEMO_FLOW.length - 1].assistantResponse,
+        demoStepIndex: DEMO_FLOW.length - 1,
+        nextStepIndex: -1,
+        phase: 'closing',
+        isDemo: true,
+      });
+    }
+    const step = DEMO_FLOW[stepIndex];
     return NextResponse.json({
       reply: step.assistantResponse,
-      demoStepIndex: 0,
-      nextStepIndex: step.nextStep ?? 1,
+      demoStepIndex: stepIndex,
+      nextStepIndex: step.nextStep ?? stepIndex + 1,
       showButtons: step.showButtons,
       phase: step.phase,
       isDemo: true,
