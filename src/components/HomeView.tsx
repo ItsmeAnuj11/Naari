@@ -22,15 +22,17 @@ const popularSchemes = [
   { title: 'महिलाओं के लिए अन्य योजनाएँ', description: 'पेंशन, स्वरोजगार और कौशल विकास', icon: Users, tone: 'purple', tags: ['महिलाओं के लिए', 'सामाजिक सुरक्षा'] },
 ];
 
-const quickQuestions = [
-  { title: t('गर्भावस्था के लिए कोई योजना'), subtitle: t('जैसे PM Matru Vandana Yojana'), icon: Baby, tone: 'pink', prompt: 'गर्भावस्था में कौन सी सरकारी सहायता मिलती है?' },
-  { title: t('लड़कियों की पढ़ाई के लिए योजना'), subtitle: t('जैसे Sukanya Samriddhi Yojana'), icon: GraduationCap, tone: 'green', prompt: 'लड़कियों की पढ़ाई के लिए कौन सी योजनाएँ हैं?' },
-  { title: t('रसोई गैस के लिए योजना'), subtitle: t('जैसे Ujjwala Yojana'), icon: Flame, tone: 'orange', prompt: 'उज्ज्वला योजना के बारे में बताइए' },
-  { title: 'महिलाओं के लिए अन्य योजनाएँ', subtitle: t('जैसे पेंशन, स्वरोजगार, कौशल विकास'), icon: Users, tone: 'purple', prompt: 'महिलाओं के लिए उपलब्ध सरकारी योजनाएँ बताइए' },
-];
-
 export function HomeView({ onNavigateTab, speak, isSpeaking, isListening, startListening, stopListening, transcript }: HomeViewProps) {
   const { t } = useLanguage();
+
+  // quickQuestions must be inside the component so t() is in scope
+  const quickQuestions = [
+    { title: t('गर्भावस्था के लिए कोई योजना'), subtitle: t('जैसे PM Matru Vandana Yojana'), icon: Baby, tone: 'pink', prompt: 'गर्भावस्था में कौन सी सरकारी सहायता मिलती है?' },
+    { title: t('लड़कियों की पढ़ाई के लिए योजना'), subtitle: t('जैसे Sukanya Samriddhi Yojana'), icon: GraduationCap, tone: 'green', prompt: 'लड़कियों की पढ़ाई के लिए कौन सी योजनाएँ हैं?' },
+    { title: t('रसोई गैस के लिए योजना'), subtitle: t('जैसे Ujjwala Yojana'), icon: Flame, tone: 'orange', prompt: 'उज्ज्वला योजना के बारे में बताइए' },
+    { title: 'महिलाओं के लिए अन्य योजनाएँ', subtitle: t('जैसे पेंशन, स्वरोजगार, कौशल विकास'), icon: Users, tone: 'purple', prompt: 'महिलाओं के लिए उपलब्ध सरकारी योजनाएँ बताइए' },
+  ];
+
   const ask = (prompt: string) => {
     speak(prompt);
   };
@@ -48,7 +50,7 @@ export function HomeView({ onNavigateTab, speak, isSpeaking, isListening, startL
             <div className={`home-wave home-wave-right ${isListening ? 'active' : ''}`} aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
           </div>
           <div className="home-mic-prompt">{isListening ? t('सुन रहे हैं… अभी बोलिए') : t('बोलने के लिए क्लिक करें')}</div>
-          {transcript && <div className="home-transcript">“{transcript}”</div>}
+          {transcript && <div className="home-transcript">"{transcript}"</div>}
           <div className="home-trust-row">
             <div><ShieldCheck size={22} /><span>{t('सही और सरल जानकारी')}</span></div>
             <div><Languages size={22} /><span>{t('आपकी भाषा में')}</span></div>
