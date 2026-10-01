@@ -1,0 +1,8 @@
+{
+  "language": "hi",
+  "scheme": "pmmvy",
+  "app_name": "दिशा",
+  "app_tagline": "आपकी सहेली, आपकी मदद के लिए",
+  "supported_languages": ["hi"],
+  "supported_schemes": ["pmmvy"]
+}
